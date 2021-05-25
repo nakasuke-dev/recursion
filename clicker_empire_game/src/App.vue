@@ -218,6 +218,12 @@ export default {
           price: '10000000000000',
         },
       ],
+      days: 0,
   }),
+  mounted(){
+    setInterval(function(){
+      this.days++
+    }.bind(this), 1000)
+  }
 };
 </script>
