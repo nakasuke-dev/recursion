@@ -24,6 +24,7 @@
               </v-vard-text>
               <v-img 
                 src="hamburger.png"
+                @click="clickBurger"
               >
               </v-img>
             </v-card>
@@ -237,6 +238,12 @@ export default {
       profitPerClick: 25,
       profitPerSecond: 25,
   }),
+  methods: {
+    clickBurger(){
+      this.money += this.profitPerClick
+      this.burgers += 1
+    }
+  },
   mounted(){
     setInterval(function(){
       this.days++
