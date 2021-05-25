@@ -11,8 +11,16 @@
                 <v-toolbar-title>Click Hamburger</v-toolbar-title>
               </v-app-bar>
               <v-vard-text>
-                <p class="text-center">Burgers</p>
-                <p class="text-center">per seconds</p>
+                <v-container>
+                <v-card>
+                  <v-card-title class="justify-center">
+                    1 Burgers
+                  </v-card-title>
+                  <v-card-text class="text-center">
+                    25$ per second
+                  </v-card-text> 
+                </v-card> 
+                </v-container>              
               </v-vard-text>
               <v-img 
                 src="hamburger.png"
@@ -38,7 +46,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        Name
+                        Name:
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -47,7 +55,18 @@
                       <v-card-text
                         class="text-center"
                       >
-                        Name
+                        25 yrs old
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-card
+                    >
+
+                      <v-card-text
+                        class="text-center"
+                      >
+                        {{days}} days
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -57,17 +76,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        Name
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-card
-                    >
-                      <v-card-text
-                        class="text-center"
-                      >
-                        Name
+                        $1234
                       </v-card-text>
                     </v-card>
                   </v-col>
