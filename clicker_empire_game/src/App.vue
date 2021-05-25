@@ -14,10 +14,10 @@
                 <v-container>
                 <v-card>
                   <v-card-title class="justify-center">
-                    1 Burgers
+                    {{burgers}} Burgers
                   </v-card-title>
                   <v-card-text class="text-center">
-                    25$ per second
+                    {{profitPerSecond}}$ per second / {{profitPerClick}}$ per click
                   </v-card-text> 
                 </v-card> 
                 </v-container>              
@@ -46,7 +46,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        Name:
+                        Name: {{name}}
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -55,7 +55,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        25 yrs old
+                        {{years}} yrs old
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -76,7 +76,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        $1234
+                        ${{money}}
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="d-flex align-center mr-10">
                           <v-chip color="primary">
-                            count
+                            count: {{item.count}}
                           </v-chip>
                         </div>
                       </div>
@@ -156,69 +156,86 @@ export default {
           title: 'Flip machine',
           description: 'グリルをクリックごとに 25 円を取得します。',
           price: '15000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'ETF Stock',
           description: 'ETF 銘柄の購入分をまとめて加算し、毎秒 0.1% を取得します。',
           price: '300000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'ETF Bonds',
           description: '債券 ETF の購入分をまとめて加算し、毎秒 0.07% を取得します。',
           price: '300000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Lemonade Stand',
           description: '毎秒 30 円を取得します。',
           price: '30000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Ice Cream Truck',
           description: '毎秒 120 円を取得します。',
           price: '100000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'House',
           description: '毎秒 32,000 円を取得します。',
           price: '20000000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'TownHouse',
           description: '毎秒 64,000 円を取得します。',
           price: '40000000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Mansion',
           description: '毎秒 500,000 円を取得します。',
           price: '250000000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Industrial Space',
           description: '毎秒 2,200,000 円を取得します。',
           price: '1000000000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Hotel Skyscraper',
           description: '毎秒 25,000,000 円を取得します。',
           price: '10000000000',
+          count: 0,
         },
         {
           src: 'hamburger.png',
           title: 'Bullet-Speed Sky Railway',
           description: '毎秒 30,000,000,000 円を取得します。',
           price: '10000000000000',
+          count: 0,
         },
       ],
+      name: 'Name',
       days: 0,
+      years: 25,
+      money: 50000,
+      burgers: 0,
+      profitPerClick: 25,
+      profitPerSecond: 25,
   }),
   mounted(){
     setInterval(function(){
