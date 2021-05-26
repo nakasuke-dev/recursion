@@ -22,11 +22,14 @@
                 </v-card> 
                 </v-container>              
               </v-vard-text>
-              <v-img 
-                src="hamburger.png"
-                @click="clickBurger"
-              >
-              </v-img>
+              <v-scroll-y-transition>
+                <v-img 
+                  src="hamburger.png"
+                  @click="clickBurger"
+                  :key="burgers"
+                >
+                </v-img>
+              </v-scroll-y-transition>
             </v-card>
           </v-col>
           <v-col cols="8">
