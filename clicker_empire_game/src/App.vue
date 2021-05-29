@@ -12,14 +12,14 @@
               </v-app-bar>
               <v-vard-text>
                 <v-container>
-                <v-card>
-                  <v-card-title class="justify-center">
-                    {{burgers}} Burgers
-                  </v-card-title>
-                  <v-card-text class="text-center">
-                    {{profitPerSecond}}$ per second / {{profitPerClick}}$ per click
-                  </v-card-text> 
-                </v-card> 
+                  <v-card>
+                    <v-card-title class="justify-center">
+                      {{burgers}} Burgers
+                    </v-card-title>
+                    <v-card-text class="text-center">
+                      {{profitPerSecond}}$ per second / {{profitPerClick}}$ per click
+                    </v-card-text> 
+                  </v-card> 
                 </v-container>              
               </v-vard-text>
               <v-scroll-y-transition>
