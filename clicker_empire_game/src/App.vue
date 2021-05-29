@@ -151,7 +151,7 @@
                         </div>
                         <div class="d-flex align-center mr-10">
                           <v-chip color="primary">
-                            count: {{item.count}}
+                            count: {{item.count}} / {{ item.maxCount | filterInfinite }}
                           </v-chip>
                         </div>
                       </div>
@@ -224,6 +224,7 @@ export default {
           title: 'Flip machine',
           description: 'グリルをクリックごとに 25 円を取得します。',
           price: '15000',
+          maxCount: 500,
           count: 0,
         },
         {
@@ -231,6 +232,7 @@ export default {
           title: 'ETF Stock',
           description: 'ETF 銘柄の購入分をまとめて加算し、毎秒 0.1% を取得します。',
           price: '300000',
+          maxCount: Infinity,
           count: 0,
         },
         {
@@ -238,6 +240,7 @@ export default {
           title: 'ETF Bonds',
           description: '債券 ETF の購入分をまとめて加算し、毎秒 0.07% を取得します。',
           price: '300000',
+          maxCount: Infinity,
           count: 0,
         },
         {
@@ -245,6 +248,7 @@ export default {
           title: 'Lemonade Stand',
           description: '毎秒 30 円を取得します。',
           price: '30000',
+          maxCount: 1000,
           count: 0,
         },
         {
@@ -252,6 +256,7 @@ export default {
           title: 'Ice Cream Truck',
           description: '毎秒 120 円を取得します。',
           price: '100000',
+          maxCount: 500,
           count: 0,
         },
         {
@@ -259,6 +264,7 @@ export default {
           title: 'House',
           description: '毎秒 32,000 円を取得します。',
           price: '20000000',
+          maxCount: 100,
           count: 0,
         },
         {
@@ -266,6 +272,7 @@ export default {
           title: 'TownHouse',
           description: '毎秒 64,000 円を取得します。',
           price: '40000000',
+          maxCount: 100,
           count: 0,
         },
         {
@@ -273,6 +280,7 @@ export default {
           title: 'Mansion',
           description: '毎秒 500,000 円を取得します。',
           price: '250000000',
+          maxCount: 20,
           count: 0,
         },
         {
@@ -280,6 +288,7 @@ export default {
           title: 'Industrial Space',
           description: '毎秒 2,200,000 円を取得します。',
           price: '1000000000',
+          maxCount: 10,
           count: 0,
         },
         {
@@ -287,6 +296,7 @@ export default {
           title: 'Hotel Skyscraper',
           description: '毎秒 25,000,000 円を取得します。',
           price: '10000000000',
+          maxCount: 5,
           count: 0,
         },
         {
@@ -294,6 +304,7 @@ export default {
           title: 'Bullet-Speed Sky Railway',
           description: '毎秒 30,000,000,000 円を取得します。',
           price: '10000000000000',
+          maxCount: 1,
           count: 0,
         },
       ],
@@ -334,6 +345,12 @@ export default {
     setInterval(function(){
       this.days++
     }.bind(this), 1000)
+  },
+  filters: {
+    filterInfinite: function (value) {
+      if (value === Infinity ) return '∞'
+      return value
+    }
   }
 };
 </script>
