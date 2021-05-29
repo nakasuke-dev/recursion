@@ -41,6 +41,27 @@
                 dark
               >
                 <v-toolbar-title>User Status</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on" large>mdi-folder-download-outline</v-icon>
+                  </template>
+                  <span>現在データのダウンロード</span>
+                </v-tooltip>
+                <div class="mx-2"></div>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on" large>mdi-reload</v-icon>
+                  </template>
+                  <span>続きから始める</span>
+                </v-tooltip>
+                <div class="mx-2"></div>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on" large>mdi-account-cog</v-icon>
+                  </template>
+                  <span>ユーザーデータの設定</span>
+                </v-tooltip>
               </v-app-bar>
               <v-container>
                 <v-row dense>
