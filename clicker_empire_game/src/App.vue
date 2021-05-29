@@ -14,10 +14,10 @@
                 <v-container>
                   <v-card>
                     <v-card-title class="justify-center">
-                      {{burgers}} Burgers
+                      {{ burgers | filterNumberByComma }} Burgers
                     </v-card-title>
                     <v-card-text class="text-center">
-                      {{profitPerSecond}}$ per second / {{profitPerClick}}$ per click
+                      {{ profitPerSecond | filterNumberByComma }}$ per second / {{ profitPerClick | filterNumberByComma }}$ per click
                     </v-card-text> 
                   </v-card> 
                 </v-container>              
@@ -80,7 +80,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        {{ realYears }} yrs old
+                        {{ realYears | filterNumberByComma }} yrs old
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -91,7 +91,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        {{days}} days
+                        {{ days | filterNumberByComma }} days
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -101,7 +101,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        ${{money}}
+                        ${{ money | filterNumberByComma }}
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -144,14 +144,14 @@
                               rounded
                               small
                             >
-                              {{item.price}}$ Buy
+                              {{ item.price | filterNumberByComma }}$ Buy
                             </v-btn>
                           </v-card-actions>
                         </div>
                         </div>
                         <div class="d-flex align-center mr-10">
                           <v-chip color="primary">
-                            count: {{item.count}} / {{ item.maxCount | filterInfinite }}
+                            count: {{ item.count | filterNumberByComma }} / {{ item.maxCount | filterNumberByComma | filterInfinite }}
                           </v-chip>
                         </div>
                       </div>
@@ -223,7 +223,7 @@ export default {
           src: 'hanburger-machine.png',
           title: 'Flip machine',
           description: 'グリルをクリックごとに 25 円を取得します。',
-          price: '15000',
+          price: 15000,
           maxCount: 500,
           count: 0,
         },
@@ -231,7 +231,7 @@ export default {
           src: 'stock.png',
           title: 'ETF Stock',
           description: 'ETF 銘柄の購入分をまとめて加算し、毎秒 0.1% を取得します。',
-          price: '300000',
+          price: 300000,
           maxCount: Infinity,
           count: 0,
         },
@@ -239,7 +239,7 @@ export default {
           src: 'stock.png',
           title: 'ETF Bonds',
           description: '債券 ETF の購入分をまとめて加算し、毎秒 0.07% を取得します。',
-          price: '300000',
+          price: 300000,
           maxCount: Infinity,
           count: 0,
         },
@@ -247,7 +247,7 @@ export default {
           src: 'lemonade-stand.png',
           title: 'Lemonade Stand',
           description: '毎秒 30 円を取得します。',
-          price: '30000',
+          price: 30000,
           maxCount: 1000,
           count: 0,
         },
@@ -255,7 +255,7 @@ export default {
           src: 'icecream-trailer.png',
           title: 'Ice Cream Truck',
           description: '毎秒 120 円を取得します。',
-          price: '100000',
+          price: 100000,
           maxCount: 500,
           count: 0,
         },
@@ -263,7 +263,7 @@ export default {
           src: 'house.png',
           title: 'House',
           description: '毎秒 32,000 円を取得します。',
-          price: '20000000',
+          price: 20000000,
           maxCount: 100,
           count: 0,
         },
@@ -271,7 +271,7 @@ export default {
           src: 'town-house.png',
           title: 'TownHouse',
           description: '毎秒 64,000 円を取得します。',
-          price: '40000000',
+          price: 40000000,
           maxCount: 100,
           count: 0,
         },
@@ -279,7 +279,7 @@ export default {
           src: 'mansion.png',
           title: 'Mansion',
           description: '毎秒 500,000 円を取得します。',
-          price: '250000000',
+          price: 250000000,
           maxCount: 20,
           count: 0,
         },
@@ -287,7 +287,7 @@ export default {
           src: 'industrial-space.png',
           title: 'Industrial Space',
           description: '毎秒 2,200,000 円を取得します。',
-          price: '1000000000',
+          price: 1000000000,
           maxCount: 10,
           count: 0,
         },
@@ -295,7 +295,7 @@ export default {
           src: 'hotel.png',
           title: 'Hotel Skyscraper',
           description: '毎秒 25,000,000 円を取得します。',
-          price: '10000000000',
+          price: 10000000000,
           maxCount: 5,
           count: 0,
         },
@@ -303,7 +303,7 @@ export default {
           src: 'shinkansen.png',
           title: 'Bullet-Speed Sky Railway',
           description: '毎秒 30,000,000,000 円を取得します。',
-          price: '10000000000000',
+          price: 10000000000000,
           maxCount: 1,
           count: 0,
         },
@@ -350,7 +350,11 @@ export default {
     filterInfinite: function (value) {
       if (value === Infinity ) return '∞'
       return value
-    }
+    },
+    filterNumberByComma: function (value) {
+      if (!value) return '0'
+      return value.toLocaleString();
+    },
   }
 };
 </script>
