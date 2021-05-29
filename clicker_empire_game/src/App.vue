@@ -58,7 +58,7 @@
                 <div class="mx-2"></div>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-icon v-bind="attrs" v-on="on" large>mdi-account-cog</v-icon>
+                    <v-icon v-bind="attrs" v-on="on" large @click="profileDialogOpen()">mdi-account-cog</v-icon>
                   </template>
                   <span>ユーザーデータの設定</span>
                 </v-tooltip>
@@ -165,6 +165,47 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-dialog
+        v-model="profileDialog"
+        persistent
+        max-width="600px"
+      >
+        <v-card>
+          <v-card-title>
+            <span class="headline">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    label="User name"
+                    v-model="profileForm.name"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="profileDialog = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="profileDataSave()"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-main>
   </v-app>
 </template>
@@ -255,17 +296,29 @@ export default {
         },
       ],
       name: 'Name',
+      profileForm: {
+        name: '',
+      },
       days: 0,
       years: 25,
       money: 50000,
       burgers: 0,
       profitPerClick: 25,
       profitPerSecond: 25,
+      profileDialog: false,
   }),
   methods: {
     clickBurger(){
       this.money += this.profitPerClick
       this.burgers += 1
+    },
+    profileDialogOpen(){
+      this.profileForm.name = this.name
+      this.profileDialog = true
+    },
+    profileDataSave(){
+      this.name = this.profileForm.name
+      this.profileDialog = false
     }
   },
   mounted(){
