@@ -112,8 +112,8 @@
                 <v-list max-height="450" class="overflow-y-auto">
                 <v-row dense>
                   <v-list-item
-                    v-for="(item, i) in items"
-                    :key="i"
+                    v-for="(item, itemIndex) in items"
+                    :key="itemIndex"
                     cols="12"
                   >
                   <v-col>
@@ -143,6 +143,7 @@
                               outlined
                               rounded
                               small
+                              @click="itemDialogOpen(itemIndex)"
                             >
                               {{ item.price | filterNumberByComma }}$ Buy
                             </v-btn>
@@ -202,6 +203,50 @@
               @click="profileDataSave()"
             >
               Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog
+        v-model="itemDialog"
+        persistent
+        max-width="600px"
+      >
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ selectedItem.title }}</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    label="購入数"
+                    v-model.number="itemForm.purchaseCount"
+                    type="number"
+                    min="1"
+                    :max="selectedItem.maxCount"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="itemDialog = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="buyItem()"
+            >
+              Buy
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -336,10 +381,15 @@ export default {
       profileForm: {
         name: '',
       },
+      itemForm: {
+        purchaseCount: 0,
+      },
       days: 0,
       money: 50000,
       burgers: 0,
       profileDialog: false,
+      itemDialog: false,
+      selectItemIndex: 0, 
   }),
   computed: {
     passedYears(){
@@ -354,6 +404,9 @@ export default {
     profitPerSecond(){
       return initialProfitPerSecond + this.items.reduce(((acc, item) => acc + item.effectByTime() ), 0)
     },
+    selectedItem(){
+      return this.items[this.selectItemIndex]
+    },
   },
   methods: {
     clickBurger(){
@@ -367,6 +420,21 @@ export default {
     profileDataSave(){
       this.name = this.profileForm.name
       this.profileDialog = false
+    },
+    itemDialogOpen(index){
+      this.itemForm.purchaseCount = 1
+      this.selectItemIndex = index
+      this.itemDialog = true
+    },
+    buyItem(){
+      const purchasePrice = this.selectedItem.price * this.itemForm.purchaseCount
+      if(this.money < purchasePrice){
+        alert('金額が不足しています')
+      } else{
+        this.money -= purchasePrice
+        this.items[this.selectItemIndex].count += Number(this.itemForm.purchaseCount)
+      }
+      this.itemDialog = false
     }
   },
   mounted(){
