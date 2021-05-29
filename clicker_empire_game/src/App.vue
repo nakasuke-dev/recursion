@@ -80,7 +80,7 @@
                       <v-card-text
                         class="text-center"
                       >
-                        {{years}} yrs old
+                        {{ realYears }} yrs old
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -212,6 +212,8 @@
 
 <script>
 
+const initialYears = 25
+
 export default {
   name: 'App',
 
@@ -300,13 +302,20 @@ export default {
         name: '',
       },
       days: 0,
-      years: 25,
       money: 50000,
       burgers: 0,
       profitPerClick: 25,
       profitPerSecond: 25,
       profileDialog: false,
   }),
+  computed: {
+    passedYears(){
+      return Math.floor(this.days / 365)
+    },
+    realYears(){
+      return initialYears + this.passedYears 
+    },
+  },
   methods: {
     clickBurger(){
       this.money += this.profitPerClick
