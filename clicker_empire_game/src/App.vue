@@ -213,6 +213,8 @@
 <script>
 
 const initialYears = 25
+const initialProfitPerClick = 25
+const initialProfitPerSecond = 0
 
 export default {
   name: 'App',
@@ -226,6 +228,8 @@ export default {
           price: 15000,
           maxCount: 500,
           count: 0,
+          effectByClick: function(){ return this.count * 25 },
+          effectByTime: function(){ return 0 },
         },
         {
           src: 'stock.png',
@@ -234,6 +238,8 @@ export default {
           price: 300000,
           maxCount: Infinity,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * this.price * 0.001 },
         },
         {
           src: 'stock.png',
@@ -242,6 +248,8 @@ export default {
           price: 300000,
           maxCount: Infinity,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * this.price * 0.0007 },
         },
         {
           src: 'lemonade-stand.png',
@@ -250,6 +258,8 @@ export default {
           price: 30000,
           maxCount: 1000,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 30 },
         },
         {
           src: 'icecream-trailer.png',
@@ -258,6 +268,8 @@ export default {
           price: 100000,
           maxCount: 500,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 120 },
         },
         {
           src: 'house.png',
@@ -266,6 +278,8 @@ export default {
           price: 20000000,
           maxCount: 100,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 32000 },
         },
         {
           src: 'town-house.png',
@@ -274,6 +288,8 @@ export default {
           price: 40000000,
           maxCount: 100,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 64000 },
         },
         {
           src: 'mansion.png',
@@ -282,6 +298,8 @@ export default {
           price: 250000000,
           maxCount: 20,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 500000 },
         },
         {
           src: 'industrial-space.png',
@@ -290,6 +308,8 @@ export default {
           price: 1000000000,
           maxCount: 10,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 2200000 },
         },
         {
           src: 'hotel.png',
@@ -298,6 +318,8 @@ export default {
           price: 10000000000,
           maxCount: 5,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 25000000 },
         },
         {
           src: 'shinkansen.png',
@@ -306,6 +328,8 @@ export default {
           price: 10000000000000,
           maxCount: 1,
           count: 0,
+          effectByClick: function(){ return 0 },
+          effectByTime:  function(){ return this.count * 30000000000 },
         },
       ],
       name: 'Name',
@@ -315,8 +339,6 @@ export default {
       days: 0,
       money: 50000,
       burgers: 0,
-      profitPerClick: 25,
-      profitPerSecond: 25,
       profileDialog: false,
   }),
   computed: {
@@ -325,6 +347,12 @@ export default {
     },
     realYears(){
       return initialYears + this.passedYears 
+    },
+    profitPerClick(){
+      return initialProfitPerClick + this.items.reduce(((acc, item) => acc + item.effectByClick() ), 0)      
+    },
+    profitPerSecond(){
+      return initialProfitPerSecond + this.items.reduce(((acc, item) => acc + item.effectByTime() ), 0)
     },
   },
   methods: {
@@ -344,6 +372,7 @@ export default {
   mounted(){
     setInterval(function(){
       this.days++
+      this.money += this.profitPerSecond
     }.bind(this), 1000)
   },
   filters: {
