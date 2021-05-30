@@ -218,7 +218,6 @@ export default {
     hddItems: [],
     ssdItems: [],
 
-
     //cpu
     cpuHashGroupsByBrand: {},
     cpuHashGroupsByBrandAndModel: {},
@@ -274,7 +273,7 @@ export default {
     setRamHashGroups(){
       const reg = /(\d+)x\d+[GB|TB]/
       const filterNumber = (i) => (i.Model.match(reg)[1])
-      this.ramHashGroupsByNumber                 = itemHashGroups(this.ramItems, filterNumber)
+      this.ramHashGroupsByNumber = itemHashGroups(this.ramItems, filterNumber)
     },
     sethddHashGroups(){
       this.hddHashGroupsByBrand = itemHashGroups(this.hddItems, (i) => (i.Brand))
