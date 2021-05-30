@@ -112,6 +112,70 @@
           </v-row>
         </v-card>
       </v-container>
+      <v-container>
+        <template v-if="isBuilt">
+          <v-row>
+            <v-col cols="6">
+              <v-card>
+                <v-card-title>
+                  selected cpu
+                </v-card-title>
+                <v-card-text>
+                  <p>Brand: {{selectedCpuItem.Brand}}</p>
+                  <p>Model: {{selectedCpuItem.Model}}</p>
+                  <p>Benchmark: {{selectedCpuItem.Benchmark}}</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="6">
+              <v-card>
+                <v-card-title>
+                  selected gpu
+                </v-card-title>
+                <v-card-text>
+                  <p>Brand: {{selectedGpuItem.Brand}}</p>
+                  <p>Model: {{selectedGpuItem.Model}}</p>
+                  <p>Benchmark: {{selectedGpuItem.Benchmark}}</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="6">
+              <v-card>
+                <v-card-title>
+                  selected ram
+                </v-card-title>
+                <v-card-text>
+                  <p>Brand: {{selectedRamItem.Brand}}</p>
+                  <p>Model: {{selectedRamItem.Model}}</p>
+                  <p>Benchmark: {{selectedRamItem.Benchmark}}</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="6">
+              <v-card v-if="selectedStorageType === 'hdd'">
+                <v-card-title>
+                  selected hdd
+                </v-card-title>
+                <v-card-text>
+                  <p>Brand: {{selectedHddItem.Brand}}</p>
+                  <p>Model: {{selectedHddItem.Model}}</p>
+                  <p>Benchmark: {{selectedHddItem.Benchmark}}</p>
+                </v-card-text>
+              </v-card>
+              <v-card v-else-if="selectedStorageType === 'ssd'">
+                <v-card-title>
+                  selected ssd
+                </v-card-title>
+                <v-card-text>
+                  <p>Brand: {{selectedSsdItem.Brand}}</p>
+                  <p>Model: {{selectedSsdItem.Model}}</p>
+                  <p>Benchmark: {{selectedSsdItem.Benchmark}}</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </template>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -220,6 +284,13 @@ export default {
     },    
   },
   computed: {
+    isBuilt(){
+      if(this.selectedCpuItem && this.selectedGpuItem && this.selectedRamItem && (this.selectedHddItem || this.selectedSsdItem) ){
+        return true
+      } else {
+        return false
+      }
+    },
     /*cpu*/
     /**
      * @return {String[]}
